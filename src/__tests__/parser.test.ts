@@ -1,7 +1,6 @@
 import Parser from '../Parser'
 import {PokerHand} from "../PokerHand";
 
-//No Players
 //Multiple Players
 //Nonstandard whitespace
 //Nonstandard formatting
@@ -15,5 +14,13 @@ describe('The input parser', function () {
         let pokerHand: PokerHand = new PokerHand("Jayne", [ "QH", "KS", "3H", "2C", "AD", "TC", "4D"]);
 
         expect(Parser.parse(input)).toEqual([pokerHand])
+    });
+
+    it('returns an empty list when given input with no players', function () {
+        let input: string = `
+        QH KS 3H 2C AD
+        `;
+
+        expect(Parser.parse(input)).toEqual([])
     });
 });
