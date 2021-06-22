@@ -1,7 +1,7 @@
 import {PokerHand} from "./pokerHands/PokerHand";
 
 export default class Parser {
-    static parse(input: string) {
+    static parse(input: string): PokerHand[] {
         const inputLines: string[] = input.trim().split("\n")
 
         let pokerHands = this.buildHands(inputLines);

@@ -18,7 +18,7 @@ describe('The input parser', function () {
         let malsHand: PokerHand = new PokerHand("Mal", [ "QH", "KS", "3H", "2C", "AD", "KD", "KH"]);
         let washsHand: PokerHand = new PokerHand("Wash", [ "QH", "KS", "3H", "2C", "AD", "JD", "TH"]);
 
-        let pokerHands = [jaynesHand, zoesHand, malsHand, washsHand];
+        let pokerHands: PokerHand[] = [jaynesHand, zoesHand, malsHand, washsHand];
         expect(Parser.parse(input)).toEqual(pokerHands)
     });
 
