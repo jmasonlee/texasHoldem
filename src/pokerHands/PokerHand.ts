@@ -5,6 +5,7 @@ export enum HandType {
     HIGH_CARD,
     PAIR,
     THREE_OF_A_KIND,
+    STRAIGHT,
     FULL_HOUSE,
     FOUR_OF_A_KIND,
 }
@@ -26,7 +27,9 @@ export abstract class PokerHand {
         return `${this.playerName} ${this.handName}${(this.getStringRepresentationOfRankingCards())}`
     }
 
-    protected abstract getStringRepresentationOfRankingCards(): string
 
+    protected getStringRepresentationOfRankingCards(): string {
+        return ` ${this.rankingCards.cards[0].valueName}`
+    }
 }
 
