@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/typescript.StarterProject.iml" filepath="$PROJECT_DIR$/.idea/typescript.StarterProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/texasHoldem.iml" filepath="$PROJECT_DIR$/.idea/texasHoldem.iml" />
     </modules>
   </component>
 </project>
