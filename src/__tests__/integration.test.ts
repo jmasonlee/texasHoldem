@@ -57,6 +57,22 @@ describe("The Poker Ranker", () => {
 
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
+
+    it('ranks 4 of a kind above a full house, and below a Straight Flush', () => {
+        let showdown: string = `
+        4H 2H 3H 2C 3D
+        Jayne 3C 5D
+        Mal   2H 2S
+        Zoe   5H 6H
+        `
+
+        let expectedRanking: string =
+            '1. Zoe Straight Flush 6\n' +
+            '2. Mal Four of a Kind 2\n' +
+            '3. Jayne Full House 3 2\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
 })
