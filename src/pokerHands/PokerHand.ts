@@ -9,13 +9,13 @@ export enum HandType {
     FOUR_OF_A_KIND,
 }
 
-export class PokerHand {
+export abstract class PokerHand {
     private static HAND_SIZE: number = 5
     playerName: string
     rankingCards: CardArray
     handType: HandType
     handName: string
-     constructor(playerName: string, cards: string[]) {
+     protected constructor(playerName: string, cards: CardArray) {
         this.playerName = playerName
         this.rankingCards = this.getRankingCards(cards)
     }

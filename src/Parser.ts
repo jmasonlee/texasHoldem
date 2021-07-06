@@ -1,16 +1,19 @@
 import {PokerHand} from "./pokerHands/PokerHand";
+import {PokerHandFactory} from "./pokerHands/PokerHandFactory";
 
 export default class Parser {
     static parse(input: string): PokerHand[] {
-        const inputLines: string[] = input.trim().split("\n")
+        let parsedElements = this.parseInputIntoElements(input);
 
-        let pokerHands = this.buildHands(inputLines);
+        let communityCards: string[] = parsedElements[0]
 
-        return pokerHands;
+        let playersAndHoleCards: string[][] = parsedElements.slice(1);
+
+        return this.createHands(playersAndHoleCards, communityCards);
     }
 
-    private static buildHands(inputLines: string[]) {
-
+    private static parseInputIntoElements(input: string) {
+        let inputLines: string[] = input.trim().split("\n")
         let parsedElements: string[][] = []
 
         inputLines.forEach(line => {
@@ -18,28 +21,22 @@ export default class Parser {
             parsedElements.push(elements)
         })
 
-        let communityCards: string[] = parsedElements[0]
-        let playersAndPocketCards: string[][] = parsedElements.slice(1);
-        return this.createHands(playersAndPocketCards, communityCards);
+        return parsedElements;
     }
 
     private static createHands(playersAndPocketCards: string[][], communityCards: string[]) :PokerHand[]{
         let pokerHands: PokerHand[] = [];
+
         playersAndPocketCards.forEach(line => {
             let playerName: string = line[0]
-            let playerCards = this.getPotentialPlayerCards(communityCards, line);
+            let holeCards: string[] = line.slice(1)
+            let playerCards: string[] = [...communityCards, ...holeCards]
 
-            let pokerHand = new PokerHand(playerName, playerCards);
+            let pokerHand = PokerHandFactory.createPokerHand(playerName, playerCards)
             pokerHands.push(pokerHand)
         })
-        return pokerHands
-    }
 
-    private static getPotentialPlayerCards(communityCards: string[], line: string[]) {
-        let cards: string[] = []
-        communityCards.forEach(card => cards.push(card))
-        line.slice(1).forEach(card => cards.push(card))
-        return cards;
+        return pokerHands
     }
 
     private static splitLinesIntoElements(line: string) {

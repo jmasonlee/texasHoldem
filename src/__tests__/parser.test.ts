@@ -1,5 +1,6 @@
 import Parser from '../Parser'
 import {PokerHand} from "../pokerHands/PokerHand";
+import {PokerHandFactory} from "../pokerHands/PokerHandFactory";
 
 //Nonstandard whitespace
 //Nonstandard formatting
@@ -13,10 +14,11 @@ describe('The input parser', function () {
         Wash  JD TH
         `;
 
-        let jaynesHand: PokerHand = new PokerHand("Jayne", [ "QH", "KS", "3H", "2C", "AD", "TC", "4D"]);
-        let zoesHand: PokerHand = new PokerHand("Zoe", [ "QH", "KS", "3H", "2C", "AD", "3S", "5C"]);
-        let malsHand: PokerHand = new PokerHand("Mal", [ "QH", "KS", "3H", "2C", "AD", "KD", "KH"]);
-        let washsHand: PokerHand = new PokerHand("Wash", [ "QH", "KS", "3H", "2C", "AD", "JD", "TH"]);
+        let communityCards = ["QH", "KS", "3H", "2C", "AD"];
+        let jaynesHand: PokerHand = PokerHandFactory.createPokerHand("Jayne", [...communityCards, "TC", "4D"])
+        let zoesHand: PokerHand = PokerHandFactory.createPokerHand("Zoe", [...communityCards, "3S", "5C"])
+        let malsHand: PokerHand = PokerHandFactory.createPokerHand("Mal", [...communityCards, "KD", "KH"])
+        let washsHand: PokerHand = PokerHandFactory.createPokerHand("Wash", [...communityCards, "JD", "TH"])
 
         let pokerHands: PokerHand[] = [jaynesHand, zoesHand, malsHand, washsHand];
         expect(Parser.parse(input)).toEqual(pokerHands)
