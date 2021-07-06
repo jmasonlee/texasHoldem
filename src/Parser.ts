@@ -1,4 +1,4 @@
-import {PokerHand} from "./PokerHand";
+import {PokerHand} from "./pokerHands/PokerHand";
 
 export default class Parser {
     static parse(input: string) {

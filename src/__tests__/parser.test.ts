@@ -1,5 +1,5 @@
 import Parser from '../Parser'
-import {PokerHand} from "../PokerHand";
+import {PokerHand} from "../pokerHands/PokerHand";
 
 //Nonstandard whitespace
 //Nonstandard formatting
