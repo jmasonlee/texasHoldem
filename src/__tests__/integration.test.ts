@@ -28,6 +28,35 @@ describe("The Poker Ranker", () => {
         3. Mal High Card 7D
         4. Zoe High Card 5C
         `
+    it('ranks a straight above 3 of a kind and below a Flush', () => {
+        let showdown: string = `
+        AH 2H 3H TC 9D
+        Jayne 4C 5D
+        Zoe   9S 9C
+        Mal   KH JH
+        `
+
+        let expectedRanking: string =
+            '1. Mal Flush Ace\n' +
+            '2. Jayne Straight 5\n' +
+            '3. Zoe Three of a Kind 9\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
+
+    it('ranks a full house above a flush', () => {
+        let showdown: string = `
+        AH 2H 3H 5C 3D
+        Jayne 3C 5D
+        Mal   KH JH
+        `
+
+        let expectedRanking: string =
+            '1. Jayne Full House 3 5\n' +
+            '2. Mal Flush Ace\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
 })
