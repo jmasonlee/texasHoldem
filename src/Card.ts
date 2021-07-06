@@ -3,6 +3,14 @@ export interface Card {
     suit: (string | undefined)
     valueName: (string | undefined)
 }
+export function makeLowAce(highAce: Card){
+    return {
+        value: 1,
+        valueName: 'Ace',
+        suit: highAce.suit
+    }
+}
+
 export function compareCards(c1: Card, c2: Card) {
     if (c1.value < c2.value) {
         return 1

@@ -14,14 +14,16 @@ describe('The CardArray', () => {
     })
 
     it('pulls the longest sequence of Cards from its Card[]', () => {
-        const cards: CardArray = CardArray.getCardArrayFromSymbols(['KH', '6H', '5H', '4H', '3H', '2C'])
+        const cards: CardArray = CardArray.getCardArrayFromSymbols(['KH', '6H', '5H', '4H', '3H', 'AD', '2C'])
         const expectedSequence: Card[] = [
             getCardMatchingSymbol('6H'),
             getCardMatchingSymbol('5H'),
             getCardMatchingSymbol('4H'),
             getCardMatchingSymbol('3H'),
             getCardMatchingSymbol('2C'),
+            getCardMatchingSymbol('AD'),
         ]
+        expectedSequence[5].value = 1
 
         const actualSequence = cards.getCardsInSequence().cards
 

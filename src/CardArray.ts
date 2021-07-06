@@ -1,4 +1,4 @@
-import {Card, compareCards, getCardMatchingSymbol} from './Card'
+import {Card, compareCards, getCardMatchingSymbol, makeLowAce} from './Card'
 
 export class CardArray {
     private readonly _cards: Card[];
@@ -21,6 +21,7 @@ export class CardArray {
         let sequence: Card[] = []
 
         const sortedUniqueCards = this.filterDuplicateValues().cards.sort(compareCards)
+        CardArray.addLowAceIfRequired(sortedUniqueCards);
 
         sortedUniqueCards.forEach((card: Card, index: number) => {
             const nextCard = sequence[sequence.length - 1];
@@ -46,6 +47,15 @@ export class CardArray {
         const cards = symbols.map(c => getCardMatchingSymbol(c))
         return cards;
     }
+
+    private static addLowAceIfRequired(cards: Card[]) {
+        const lowAce = makeLowAce(cards.sort(compareCards)[0])
+        if (cards.some(c => c.value === 14) &&
+            cards[cards.length-1].value !== lowAce.value) {
+            cards.push(lowAce)
+        }
+    }
+
     private static countDuplicatesInArray(entries: any[]): Map<any, number> {
         let entryCount: Map<any, number> = new Map<any, number>()
         entries.forEach(property => {

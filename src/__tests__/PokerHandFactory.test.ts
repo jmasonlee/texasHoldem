@@ -48,4 +48,11 @@ describe("PokerHand", () => {
 
         checkHand(cardSymbols, expectedHandDescription)
     })
+
+    it('Will correctly name a Straight where ace is low', () => {
+        const expectedHandDescription = 'River Straight 5';
+        const cardSymbols = ['KD', 'QH', '5C', '4H', '3S', 'AD', '2C'];
+
+        checkHand(cardSymbols, expectedHandDescription);
+    })
 })
