@@ -41,6 +41,20 @@ describe('The CardArray', () => {
 
         expect(actualValueCounts).toEqual(expectedValueCounts)
     })
+
+    it('Counts the number of times a Card of a certain suit repeats in the array', () => {
+        const expectedValueCounts: Map<string, number> = new Map<string, number>()
+        expectedValueCounts.set('D', 1)
+        expectedValueCounts.set('S', 2)
+        expectedValueCounts.set('C', 2)
+        expectedValueCounts.set('H', 2)
+        const cards = CardArray.getCardArrayFromSymbols(['2D', '2S', '2C', '5H', '5C', 'KS', 'KH'])
+
+        const actualValueCounts: Map<string, number> = cards.countRepeatedSuits()
+
+        expect(actualValueCounts).toEqual(expectedValueCounts)
+    })
+
     it('Filters by duplicate values', () => {
         const cards = CardArray.getCardArrayFromSymbols(['2D', '2S', '2C', '5H', '5C', 'KS', 'KH'])
         const expectedFilteredArray: CardArray = CardArray.getCardArrayFromSymbols(['2D', '5H', 'KS'])

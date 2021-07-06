@@ -38,6 +38,12 @@ export class CardArray {
         const cardsInSequence = sequence.length < longestSequence.length? longestSequence : sequence
         return new CardArray(cardsInSequence)
     }
+
+    public countRepeatedSuits() {
+        let cardSuits: string[] = this._cards.map(c => c.suit)
+        return CardArray.countDuplicatesInArray(cardSuits) as Map<string, number>
+    }
+
     public countRepeatedValues() {
         let cardValues: number[] = this._cards.map(c => c.value)
         return CardArray.countDuplicatesInArray(cardValues) as Map<number, number>
