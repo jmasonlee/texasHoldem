@@ -14,7 +14,12 @@ export class Ranker {
     }
 
     private static compareHands(hand1: PokerHand, hand2: PokerHand): number {
-        return (hand2.handType - hand1.handType) 
+        return (hand2.handType - hand1.handType)  ||  Ranker.compareHandByRankingCardValue(hand1, hand2)
     }
+
+    private static compareHandByRankingCardValue(hand1: PokerHand, hand2: PokerHand): number {
+        return hand2.rankingCards.cards[0].value - hand1.rankingCards.cards[0].value
+    }
+
 }
 

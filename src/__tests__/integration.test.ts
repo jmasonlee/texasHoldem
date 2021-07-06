@@ -1,33 +1,40 @@
 import ShowdownRanker from "../ShowdownRanker"
 
 describe("The Poker Ranker", () => {
-    //Rank Cards by high card
-    //look for highest pair
     //Highest pair with kicker
-    //three of a kind
     //No hands provided
-    it('ranks the only hand provided if one hand is provided', () =>  {
+
+    it('will rank hands by highest card if no other combination  is available', () => {
         let showdown: string = `
-        QH KS 3H 2C AD
-        Jayne TC 4D
+        5H 6S 3H 2C 8D
+        Jayne JC 9D
+        Mal   TD 9H
+        Wash  9D QH
         `
-        let expectedRanking: string = `1. Jayne High Card Ace\n`
+        let expectedRanking: string =
+            '1. Wash High Card Queen\n' +
+            '2. Jayne High Card Jack\n' +
+            '3. Mal High Card 10\n'
+
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
-    xit('will rank hands by highest card if no other combination  is available', () => {
+
+    it('will rank hands by type first, ranking cards second ', () => {
         let showdown: string = `
-        QH KS 3H 2C AD
-        Jayne TC 4D
-        Zoe   3S 5C
-        Mal   7D 6H
-        Wash  5D JH
+        9H 6S 3H TC 9D
+        Jayne JC JD
+        Zoe   9S 9C
+        Wash  4D QH
         `
-        let expectedRanking: string = `
-        1. Wash High Card JH
-        2. Jayne High Card TC
-        3. Mal High Card 7D
-        4. Zoe High Card 5C
-        `
+
+        let expectedRanking: string =
+            '1. Zoe Four of a Kind 9\n' +
+            '2. Jayne Pair Jack\n' +
+            '3. Wash Pair 9\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
+
     it('ranks a straight above 3 of a kind and below a Flush', () => {
         let showdown: string = `
         AH 2H 3H TC 9D
@@ -85,8 +92,6 @@ describe("The Poker Ranker", () => {
             '1. Jayne Royal Flush\n' +
             '2. Mal Straight Flush Queen\n'
 
-        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
-    })
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
 })
