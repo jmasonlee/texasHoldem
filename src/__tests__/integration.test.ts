@@ -73,6 +73,20 @@ describe("The Poker Ranker", () => {
 
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
+
+    it('ranks a straight flush below a Royal Flush', () => {
+        let showdown: string = `
+        JH QH TH 9H 8H
+        Jayne AH KH
+        Mal   7H 6H
+        `
+
+        let expectedRanking: string =
+            '1. Jayne Royal Flush\n' +
+            '2. Mal Straight Flush Queen\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
 })

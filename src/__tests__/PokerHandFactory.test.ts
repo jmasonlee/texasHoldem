@@ -69,4 +69,11 @@ describe("PokerHand", () => {
 
         checkHand(cardSymbols, expectedHandDescription);
     })
+
+    it('Will correctly create a Royal Flush', () => {
+        const expectedHandDescription = 'River Royal Flush';
+        const cardSymbols = ['KH', 'QH', 'JH', 'TH', '9H', 'AH', '2H'];
+
+        checkHand(cardSymbols, expectedHandDescription);
+    })
 })
