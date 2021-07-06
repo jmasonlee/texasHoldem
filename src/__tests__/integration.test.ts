@@ -1,4 +1,4 @@
-import PokerHandRanker from "../PokerHandRanker"
+import ShowdownRanker from "../ShowdownRanker"
 
 describe("The Poker Ranker", () => {
     //Rank Cards by high card
@@ -11,8 +11,8 @@ describe("The Poker Ranker", () => {
         QH KS 3H 2C AD
         Jayne TC 4D
         `
-        let expectedRanking: string = `1. Jayne High Card TC`
-        expect(PokerHandRanker.rank(showdown)).toEqual(expectedRanking)
+        let expectedRanking: string = `1. Jayne High Card Ace\n`
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
     xit('will rank hands by highest card if no other combination  is available', () => {
         let showdown: string = `
@@ -28,6 +28,6 @@ describe("The Poker Ranker", () => {
         3. Mal High Card 7D
         4. Zoe High Card 5C
         `
-        expect(PokerHandRanker.rank(showdown)).toEqual(expectedRanking)
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
 })
