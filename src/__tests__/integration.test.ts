@@ -1,8 +1,14 @@
 import ShowdownRanker from "../ShowdownRanker"
 
 describe("The Poker Ranker", () => {
-    //Highest pair with kicker
-    //No hands provided
+    it('returns a message indicating no hands provided if no players were provided', () => {
+        let showdown: string = `
+        9H 6S 3H 2C 7D
+        `
+
+        let expectedOutput: string = 'Everyone folded or went home. No player hands were provided!'
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedOutput)
+    })
     it('ranks two equivalent hands as a tie', () => {
         let showdown: string = `
         QH QD 3H 2C AD

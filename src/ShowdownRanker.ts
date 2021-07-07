@@ -6,6 +6,10 @@ export default class ShowdownRanker {
 
     static rank(showdown: string): string {
             let pokerHands: PokerHand[] = Parser.parse(showdown)
+            if(pokerHands.length === 0){
+                return 'Everyone folded or went home. No player hands were provided!'
+            }
+
             let rankedHands = Ranker.rankHands(pokerHands);
             return ShowdownRanker.formatRankingForOutput(rankedHands)
     }
