@@ -126,4 +126,17 @@ describe("The Poker Ranker", () => {
 
         expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
     })
+
+    it('outputs an error message for incorrect formatting', () => {
+        let showdown: string = `
+        JH QH TH 9H 8H
+        Jayne AH 5G
+        Mal   7H 6H
+        `
+
+        let expectedRanking: string =
+            'Oops! 5G is not a valid card.'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
 })

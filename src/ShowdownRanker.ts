@@ -5,6 +5,7 @@ import {Ranker, RankingGroup} from "./Ranker";
 export default class ShowdownRanker {
 
     static rank(showdown: string): string {
+        try{
             let pokerHands: PokerHand[] = Parser.parse(showdown)
             if(pokerHands.length === 0){
                 return 'Everyone folded or went home. No player hands were provided!'
@@ -12,6 +13,9 @@ export default class ShowdownRanker {
 
             let rankedHands = Ranker.rankHands(pokerHands);
             return ShowdownRanker.formatRankingForOutput(rankedHands)
+        } catch (e) {
+            return e.message
+        }
     }
 
     private static formatRankingForOutput(rankedHands: RankingGroup[]) {

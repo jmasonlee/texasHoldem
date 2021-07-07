@@ -21,4 +21,17 @@ describe("A Card", () => {
         expect(actualValueNames).toEqual(expectedValueNames)
     })
 
+    it( 'throws an exception for a card symbol longer than 2 characters', () => {
+        expect( () => getCardMatchingSymbol('ABC')).toThrow('Oops! ABC is not a valid card.')
+    })
+
+    it( 'throws an exception for a card symbol without a valid suit', () => {
+        expect( () => getCardMatchingSymbol('A7')).toThrow('Oops! A7 is not a valid card.')
+    })
+
+    it( 'throws an exception for a card symbol without a valid value', () => {
+        expect( () => getCardMatchingSymbol('GH')).toThrow('Oops! GH is not a valid card.')
+    })
+
+
 })

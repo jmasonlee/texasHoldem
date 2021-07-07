@@ -1,8 +1,13 @@
-export interface Card {
+enum Suits {
+    'H' , 'C', 'D', 'S'
+}
+
+export class Card {
     value: (number | undefined)
     suit: (string | undefined)
     valueName: (string | undefined)
 }
+
 export function makeLowAce(highAce: Card){
     return {
         value: 1,
@@ -22,7 +27,15 @@ export function compareCards(c1: Card, c2: Card) {
     }
 }
 
+function badlyFormattedCardError(badCard: string){
+    return new Error(`Oops! ${badCard} is not a valid card.`)
+}
+
 export function getCardMatchingSymbol(cardSymbol: string): Card {
+    if(cardSymbol.length !== 2) {
+        throw badlyFormattedCardError(cardSymbol)
+    }
+
     const card:Card = {value: undefined, valueName: undefined, suit: cardSymbol[1]}
     switch (cardSymbol[0]) {
         case 'T':
@@ -49,5 +62,10 @@ export function getCardMatchingSymbol(cardSymbol: string): Card {
             card.value = +cardSymbol[0]
             card.valueName = cardSymbol[0]
     }
+
+    if(isNaN(card.value) || !(card.suit in Suits)){
+        throw badlyFormattedCardError(cardSymbol)
+    }
+
     return card
 }
