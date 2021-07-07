@@ -6,8 +6,15 @@ export default class Parser {
         let parsedElements = this.parseInputIntoElements(input);
 
         let communityCards: string[] = parsedElements[0]
+        if(communityCards.length !== 5) {
+            throw( new Error(`Oops! [${communityCards}] should have 5 community cards`))
+        }
 
         let playersAndHoleCards: string[][] = parsedElements.slice(1);
+        if(playersAndHoleCards.some(p => p.length !== 3)){
+            const badLine = playersAndHoleCards.find( p => p.length !==3 )
+            throw( new Error(`Oops! ${badLine[0]} should have 2 hole cards instead of: [${badLine.slice(1)}]`))
+        }
 
         return this.createHands(playersAndHoleCards, communityCards);
     }

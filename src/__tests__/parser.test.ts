@@ -2,8 +2,6 @@ import Parser from '../Parser'
 import {PokerHand} from "../pokerHands/PokerHand";
 import {PokerHandFactory} from "../pokerHands/PokerHandFactory";
 
-//Nonstandard whitespace
-//Nonstandard formatting
 describe('The input parser', function () {
     it('returns a poker hand for each player given', function () {
         let input: string = `
@@ -31,4 +29,40 @@ describe('The input parser', function () {
 
         expect(Parser.parse(input)).toEqual([])
     });
+
+    it('throws an exception when community cards are too short', function () {
+        let input: string = `
+        QH KS 3H 2C
+        `;
+
+        expect(() => {return Parser.parse(input)}).toThrow('Oops! [QH,KS,3H,2C] should have 5 community cards')
+    });
+
+    it('throws an exception when community cards are too long', function () {
+        let input: string = `
+        QH KS 3H 2C 5D AS
+        `;
+
+        expect(() => Parser.parse(input)).toThrow('Oops! [QH,KS,3H,2C,5D,AS] should have 5 community cards')
+    });
+
+    it('throws an exception when not given enough hole cards', () => {
+        let input: string = `
+        QH KS 3H 2C AS
+        Simon 
+        `;
+
+        expect(() => Parser.parse(input)).toThrow('Oops! Simon should have 2 hole cards instead of: []')
+    })
+
+    it('throws an exception when given too many hole cards', () => {
+        let input: string = `
+        QH KS 3H 2C AS
+        Simon AD AH AC
+        `;
+
+        expect(() => Parser.parse(input)).toThrow('Oops! Simon should have 2 hole cards instead of: [AD,AH,AC]')
+    })
+
 });
+
