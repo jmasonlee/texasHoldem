@@ -15,6 +15,7 @@ export default class ShowdownRanker {
         rankedHands.forEach((ranking:RankingGroup, index:number) => {
             const hand = ranking.pokerHands[0];
                 output += `${index+1}. ${hand.describeHand()}`;
+                output += ranking.rankingKicker ? ` Kicker ${ranking.rankingKicker.valueName}`: ``
                 output += `\n`
         })
         return output

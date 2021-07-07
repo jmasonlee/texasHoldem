@@ -4,6 +4,19 @@ describe("The Poker Ranker", () => {
     //Highest pair with kicker
     //No hands provided
 
+    it('ranks two equivalent hands by Kickers', () => {
+        let showdown: string = `
+        QH 3D 5H 2C 6D
+        Wash  QS 3S
+        Jayne QC TD
+        `
+        let expectedRanking: string =
+            '1. Jayne Pair Queen Kicker 10\n' +
+            '2. Wash Pair Queen Kicker 6\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
+
     it('will rank hands by highest card if no other combination  is available', () => {
         let showdown: string = `
         5H 6S 3H 2C 8D

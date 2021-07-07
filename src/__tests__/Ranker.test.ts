@@ -1,5 +1,6 @@
-import {getRankingGroup, Ranker} from "../Ranker"
 import {PokerHandFactory} from "../pokerHands/PokerHandFactory"
+import {Card, getCardMatchingSymbol} from "../Card"
+import {getRankingGroup, getRankingGroupWithKickers, Ranker} from "../Ranker"
 
 
 describe("The Ranker", () => {
@@ -27,6 +28,17 @@ describe("The Ranker", () => {
         const expectedRanking = [
             getRankingGroup([highPair]),
             getRankingGroup([lowPair])]
+        expect(Ranker.rankHands(game)).toEqual(expectedRanking)
+    })
+
+    it('ranks two tied hands by their kickers', () => {
+        const lowKicker = PokerHandFactory.createPokerHand('River', [...communityCards, 'TS', '3S'])
+        const highKicker = PokerHandFactory.createPokerHand('Kaylee', [...communityCards, 'TH', 'QS'])
+        const game = [lowKicker, highKicker]
+
+        const expectedRanking = [
+            getRankingGroupWithKickers([highKicker], getCardMatchingSymbol('QS')),
+            getRankingGroupWithKickers([lowKicker], getCardMatchingSymbol('JD'))]
         expect(Ranker.rankHands(game)).toEqual(expectedRanking)
     })
 })
