@@ -45,7 +45,7 @@ At the top-level, there are 3 main components in this code that are centrally co
 2. a Ranker, which is responsible for Ranking poker hands relative to one another,
 3. and a PokerHandFactory, which returns the highest possible ranking poker hand when given a set of cards.
 
-Addtionally, there is an important helper class, CardArray, which is responsible for storing an array of Cards, 
+Adtionally, there is an important helper class, CardArray, which is responsible for storing an array of Cards, 
 and filtering or sorting those cards based on the card's suit or value.
 
 A very rough class diagram is included below:
