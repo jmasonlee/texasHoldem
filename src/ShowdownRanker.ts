@@ -13,10 +13,13 @@ export default class ShowdownRanker {
     private static formatRankingForOutput(rankedHands: RankingGroup[]) {
         let output: string = ``
         rankedHands.forEach((ranking:RankingGroup, index:number) => {
-            const hand = ranking.pokerHands[0];
+            const pokerHands = ranking.pokerHands
+            pokerHands.forEach((hand) => {
                 output += `${index+1}. ${hand.describeHand()}`;
                 output += ranking.rankingKicker ? ` Kicker ${ranking.rankingKicker.valueName}`: ``
+                output += pokerHands.length > 1 ? ` (TIE)` : ``
                 output += `\n`
+            })
         })
         return output
     }

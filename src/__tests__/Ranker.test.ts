@@ -41,4 +41,24 @@ describe("The Ranker", () => {
             getRankingGroupWithKickers([lowKicker], getCardMatchingSymbol('JD'))]
         expect(Ranker.rankHands(game)).toEqual(expectedRanking)
     })
+
+    it('Groups two completely equivalent hands', () => {
+        const pair1 = PokerHandFactory.createPokerHand('River', [...communityCards, 'TS', '3S'])
+        const pair2 = PokerHandFactory.createPokerHand('Kaylee', [...communityCards, 'TH', '3H'])
+        const game = [pair2, pair1]
+
+        const expectedRanking = [getRankingGroup([pair2, pair1])]
+        expect(Ranker.rankHands(game)).toEqual(expectedRanking)
+    })
+
+    it('Groups two completely equivalent hands without kickers', () => {
+        const communityCards = ['2D', 'KD', 'JD', 'TD', 'JS']
+        const pair1 = PokerHandFactory.createPokerHand('River', [...communityCards, 'TS', 'JC'])
+        const pair2 = PokerHandFactory.createPokerHand('Kaylee', [...communityCards, 'TH', 'JH'])
+        const game = [pair2, pair1]
+
+        const expectedRanking = [getRankingGroup([pair2, pair1])]
+
+        expect(Ranker.rankHands(game)).toEqual(expectedRanking)
+    })
 })

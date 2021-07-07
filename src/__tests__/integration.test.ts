@@ -3,6 +3,19 @@ import ShowdownRanker from "../ShowdownRanker"
 describe("The Poker Ranker", () => {
     //Highest pair with kicker
     //No hands provided
+    it('ranks two equivalent hands as a tie', () => {
+        let showdown: string = `
+        QH QD 3H 2C AD
+        Jayne QC 3D
+        Wash  QS 3S
+        `
+
+        let expectedRanking: string =
+            '1. Jayne Full House Queen 3 (TIE)\n' +
+            '1. Wash Full House Queen 3 (TIE)\n'
+
+        expect(ShowdownRanker.rank(showdown)).toEqual(expectedRanking)
+    })
 
     it('ranks two equivalent hands by Kickers', () => {
         let showdown: string = `

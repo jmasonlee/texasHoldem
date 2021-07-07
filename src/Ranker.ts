@@ -38,6 +38,9 @@ export class Ranker {
 
     private static handleTie(lastHand: PokerHand, hand: PokerHand): RankingGroup[]{
         let rankedByKickers: PokerHand[] = [lastHand, hand].sort(this.compareKickers)
+        if (this.handsHaveIdenticalKickers(hand, lastHand)) {
+            return [getRankingGroup(rankedByKickers)]
+        } else {
             const differentKickerIndex = rankedByKickers[0].kickers.findIndex((kicker:Card, index: number) =>{
                 return kicker.value !== rankedByKickers[1].kickers[index].value
             })
@@ -46,10 +49,15 @@ export class Ranker {
                 (h:PokerHand):RankingGroup => {
                     return getRankingGroupWithKickers([h], h.kickers[differentKickerIndex])
                 })
+        }
     }
 
     private static areHandsTied(hand: PokerHand, lastHand: PokerHand) {
         return !this.compareHands(hand, lastHand);
+    }
+
+    private static handsHaveIdenticalKickers(hand: PokerHand, lastHand: PokerHand) {
+        return !this.compareKickers(hand, lastHand);
     }
 
     private static compareHands(hand1: PokerHand, hand2: PokerHand): number {
